@@ -5,8 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>apod</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
   </head>
+
   <body>
+    <div id="timeElement">
+      Time
+    </div>
+    <script>
+      function updateTime(){
+        var currentTime = new Date().toLocaleTimeString();
+        var timeText=document.querySelector("#timeElement");
+        timeText.innerHTML=currentTime;   
+      }
+      setInterval(updateTime, 1000);
+    </script>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>

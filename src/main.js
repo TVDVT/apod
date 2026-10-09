@@ -13,9 +13,14 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
       media = `<video src="${data.url}" controls></video>`;
     }
 
+
+    document.body.style.backgroundImage = `url('${data.url}')`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundAttachment = "fixed"; 
     document.querySelector("#app").innerHTML = `
       <h1>${data.title}</h1>
-      ${media}
       <p>${data.explanation}</p>
     `;
   })
