@@ -1,0 +1,26 @@
+#timeElement {
+    text-align: center;
+    font-size: 100px;
+    font-weight: bold;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#about {
+    background-color: rgba(104, 75, 53, 0.457);
+    padding: 5px 7px;
+}
+
+body {
+    margin:0;
+    min-height: 100vh;
+    display: flex;
+    background-color: azure;
+}
+
+#app {
+    max-width: 800px;
+    padding: 0 20px;
+}
