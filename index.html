@@ -1,29 +1,151 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>apod</title>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#07110d">
+    <meta name="description" content="A retro space terminal featuring NASA's Astronomy Picture of the Day.">
 
-  <body>
-    <div id="timeElement">
-      Time
-    </div>
+    <title>Orbital Terminal | NASA APOD</title>
+
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./src/calendar.js"></script>
+</head>
+
+<body>
+    <div class="scanlines" aria-hidden="true"></div>
+    <header class="topbar">
+        <div class="brand">
+            <span class="status-dot"></span>
+            ORBITAL TERMINAL
+        </div>
+
+        <div class="topbar-right">
+            NASA // APOD
+        </div>
+    </header>
+    <section class="shortcuts"> 
+        <div class="about-preview">
+            <p class="about-icon">[@]</p>
+            <div>
+                <p class="about-label">SHORTCUTS</p>
+                <h2>WHERE DO YOU WANT TO LAND?</h2>
+            </div>
+
+
+        </div>
+        <div class="apps">
+            <div class="links">
+                <a target="_blank" rel="noopener noreferrer" href="https://stardance.hackclub.com/home"> > Stardance</a></div>
+            <div class="links">
+                <a target="_blank" rel="noopener noreferrer" href="https://app.slack.com/"> > Slack</a></div>
+            <div class="links">
+                <a target="_blank" rel="noopener noreferrer" href="https://mail.google.com/mail/u/0/#inbox"> > Gmail</a></div>
+            <div class="links">
+                <a target="_blank" rel="noopener noreferrer" href="https://open.spotify.com/intl-fr"> > Spotify</a></div>
+            <div class="links">
+                <a target="_blank" rel="noopener noreferrer" href="https://youtube.com/"> > Youtube</a></div>
+        </div>
+    </section>
+    <section class="calendar">
+        <div class="about-preview">
+            <p class="about-icon">[!]</p>
+            <div>
+                <p class="about-label">CALENDAR</p>
+                <h2>WHEN'S THE LAUNCH?</h2>
+            </div>
+        </div>
+
+        <div class="calendar-heading">
+            <button id="prevMonth" aria-label="Previous month"> < </button>
+            <h3 id="calendarMonth">LOADING...</h3>
+            <button id="nextMonth" aria-label="Next month"> > </button>
+        </div>
+        <div class="calendar-grid calendar-weekdays">
+            <span>MON</span>
+            <span>TUE</span>
+            <span>WED</span>
+            <span>THU</span>
+            <span>FRI</span>
+            <span>SAT</span>
+            <span>SUN</span>
+        </div>
+        <div id="calendarDays" class="calendar-grid"></div>
+    </section>
+    <main>
+        <section class="clock-panel">
+            <p class="eyebrow">LOCAL SYSTEM TIME</p>
+
+            <div id="timeElement">00:00:00</div>
+
+            <p id="dateElement" class="date-label">
+                INITIALIZING...
+            </p>
+        </section>
+        <section class="apod-panel">
+            <div class="panel-heading">
+                <span class="panel-icon">[01]</span>
+                <h1>DAILY DISCOVERY</h1>
+                <span class="live-label">LIVE</span>
+            </div>
+
+            <div id="app" aria-live="polite">
+                <p class="loading">ESTABLISHING CONNECTION...</p>
+            </div>
+
+            <footer class="panel-footer">
+                <span>DATA SOURCE: NASA</span>
+                <span>END OF TRANSMISSION_</span>
+            </footer>
+        </section>
+
+    </main>
+
+    <section class="about-card">
+        <div class="about-preview">
+            <span class="about-icon">[ ? ]</span>
+
+            <div>
+                <p class="about-label">NASA // DAILY TRANSMISSION</p>
+                <h2>ABOUT TODAY'S APOD</h2>
+            </div>
+
+            <span class="expand-icon">+</span>
+        </div>
+
+        <div class="about-details">
+            <div id="about-info">
+                <p class="loading">RETRIEVING NASA DATA...</p>
+            </div>
+        </div>
+    </section>
+
     <script>
-      function updateTime(){
-        var currentTime = new Date().toLocaleTimeString();
-        var timeText=document.querySelector("#timeElement");
-        timeText.innerHTML=currentTime;   
-      }
-      setInterval(updateTime, 1000);
+        function updateTime() {
+            const now = new Date();
+
+            document.querySelector("#timeElement").textContent =
+                now.toLocaleTimeString("en-CA", {
+                    hour12: false,
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                });
+
+            document.querySelector("#dateElement").textContent =
+                now.toLocaleDateString("en-CA", {
+                    weekday: "short",
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit"
+                }).toUpperCase();
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
     </script>
-    <div class="about">
-      About
-      <div id="app"></div>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+    <script type="module" src="./src/main.js"></script>
+
+</body>
 </html>
